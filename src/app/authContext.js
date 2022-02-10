@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     });
     if (token) {
       localStorage.setItem('access_token', token, { expires: 60 });
-      axiosClient.defaults.headers.Authorization = `Bearer ${token.token}`;
+      axiosClient.defaults.headers.Authorization = `Bearer ${token.accessToken}`;
       const { data: user } = await axiosClient.get('users/me');
       setUser(user);
     }

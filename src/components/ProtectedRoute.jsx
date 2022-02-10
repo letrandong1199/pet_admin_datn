@@ -10,16 +10,15 @@ const publicRoutes = ["/"];
 const ProtectRoute = ({ children }) => {
   const router = useRouter();
   const { isAuthenticated, loading } = useAuth();
-  console.log('isAuthenticated Protect',isAuthenticated);
 
   useEffect(() => {
     console.log("Running useEEfect")
+    if (!loading)
     if (!isAuthenticated) router.push('/')
     else 
       if (publicRoutes.includes(router.pathname))
         router.push('/dashboard')
-  }, [isAuthenticated, loading])
-
+  }, [isAuthenticated,loading])
   if (loading) {
     return (
       <Backdrop className='justify-content-center align-items-center'>

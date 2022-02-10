@@ -16,13 +16,11 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [validated, setValidated] = useState(false);
   const { isAuthenticated, loading, login } = useAuth();
-  console.log('isAuthenticated', isAuthenticated);
   if (isAuthenticated) {
     router.replace('/dashboard');
   }
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login.......');
     login({ email: username, password: password })
   }
   const handleChangeUsername = (e) => {

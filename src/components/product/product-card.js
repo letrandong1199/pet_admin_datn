@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { Avatar, Box, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, ImageListItem } from '@mui/material';
 import { Clock as ClockIcon } from '../../icons/clock';
 import { Download as DownloadIcon } from '../../icons/download';
 
-export const ProductCard = ({ product, ...rest }) => (
+export const ProductCard = ({ post, ...rest }) => (
   <Card
     sx={{
       display: 'flex',
@@ -20,10 +20,9 @@ export const ProductCard = ({ product, ...rest }) => (
           pb: 3
         }}
       >
-        <Avatar
-          alt="Product"
-          src={product.media}
-          variant="square"
+        <img
+          src={`${post.media_url}`}
+          loading="lazy"
         />
       </Box>
       <Typography
@@ -32,15 +31,15 @@ export const ProductCard = ({ product, ...rest }) => (
         gutterBottom
         variant="h5"
       >
-        {product.title}
+        {post.caption}
       </Typography>
-      <Typography
+      {/* <Typography
         align="center"
         color="textPrimary"
         variant="body1"
       >
         {product.description}
-      </Typography>
+      </Typography> */}
     </CardContent>
     <Box sx={{ flexGrow: 1 }} />
     <Divider />
@@ -75,7 +74,7 @@ export const ProductCard = ({ product, ...rest }) => (
           }}
         >
           <DownloadIcon color="action" />
-          <Typography
+          {/* <Typography
             color="textSecondary"
             display="inline"
             sx={{ pl: 1 }}
@@ -84,7 +83,7 @@ export const ProductCard = ({ product, ...rest }) => (
             {product.totalDownloads}
             {' '}
             Downloads
-          </Typography>
+          </Typography> */}
         </Grid>
       </Grid>
     </Box>

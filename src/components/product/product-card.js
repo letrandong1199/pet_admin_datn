@@ -30,6 +30,7 @@ export const ProductCard = ({ post, ...rest }) => (
         color="textPrimary"
         gutterBottom
         variant="h5"
+        noWrap={true}
       >
         {post.caption}
       </Typography>

@@ -22,7 +22,7 @@ const App = (props) => {
         <ProtectRoute>
           <Head>
             <title>
-              Material Kit Pro
+              Pet-Friends Social
             </title>
             <meta
               name="viewport"

@@ -2,8 +2,12 @@
 import axiosClient from '../axiosSetup';
 class PostService {
     getAll(page) {
-        return axiosClient.get('/posts/explore' + `?page=${page}`).then(response => {
-            console.log(response.data);
+        return axiosClient.get('/posts/explore' + `?page=${page}` + '&limit=3').then(response => {
+            return response.data;
+        })
+    }
+    getCount() {
+        return axiosClient.get('/posts/explore').then(response => {
             return response.data;
         })
     }

@@ -10,7 +10,7 @@ import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 import { FiLogOut } from 'react-icons/fi'
 import { useAuth } from '../app/authContext';
-
+import userService from '../services/user.service';
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[3]
@@ -20,6 +20,19 @@ export const DashboardNavbar = (props) => {
   const { isAuthenticated, loading, logout } = useAuth();
   const [user, setUser] = useState(null);
   const { onSidebarOpen, ...other } = props;
+  useEffect(() => {
+    const getMyInfo = async () => {
+      let info = await userService.getInfo();
+      if (info) {
+        setUser(info);
+      }
+    }
+    if (isAuthenticated) {
+      getMyInfo();
+    }
+  }, [])
+
+  console.log(user);
   const handleLogout = () =>
     logout();
   return (
@@ -53,11 +66,6 @@ export const DashboardNavbar = (props) => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
-          <Tooltip title="Search">
-            <IconButton sx={{ ml: 1 }}>
-              <SearchIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
           <Box sx={{ flexGrow: 1 }} />
           <Avatar
             sx={{
@@ -65,7 +73,7 @@ export const DashboardNavbar = (props) => {
               width: 40,
               ml: 1
             }}
-            src="/static/images/avatars/avatar_1.png"
+            src={user.avatar}
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>

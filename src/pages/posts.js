@@ -10,6 +10,7 @@ const Products = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [posts, setPosts] = useState({});
+  const [pageSize, setPageSize] = useState(0);
   const handleChangePage = (e, value) => {
     e.preventDefault();
     setCurrentPage(value)
@@ -17,6 +18,9 @@ const Products = () => {
   console.log('currentPage', currentPage);
   useEffect(() => {
     const getPosts = () => {
+      postService.getCount().then(response => {
+        setPageSize(response.length);
+      })
       postService.getAll(currentPage).then(response => {
         const listPosts = response;
         setPosts({ ...posts, currentPage: listPosts })
@@ -30,7 +34,7 @@ const Products = () => {
     <>
       <Head>
         <title>
-          Products | Material Kit
+          PET-FRIENDS Social
         </title>
       </Head>
       <Box
@@ -69,7 +73,7 @@ const Products = () => {
           >
             <Pagination
               color="primary"
-              count={3}
+              count={pageSize / 3}
               page={currentPage}
               size="small"
               onChange={handleChangePage}

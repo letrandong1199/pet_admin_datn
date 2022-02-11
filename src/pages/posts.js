@@ -7,34 +7,36 @@ import { DashboardLayout } from '../components/dashboard-layout';
 import postService from 'src/services/post.service';
 import { useState, useEffect } from 'react';
 const Products = () => {
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [posts, setPosts] = useState({});
   const [pageSize, setPageSize] = useState(0);
   const handleChangePage = (e, value) => {
     e.preventDefault();
     setCurrentPage(value)
   }
+
   console.log('currentPage', currentPage);
+  console.log('search', search);
   useEffect(() => {
     const getPosts = () => {
       postService.getCount().then(response => {
         setPageSize(response.length);
       })
-      postService.getAll(currentPage).then(response => {
+      postService.getAll(currentPage, search).then(response => {
         const listPosts = response;
         setPosts({ ...posts, currentPage: listPosts })
       }).catch(console.error());
     }
     getPosts();
-  }, [currentPage])
+  }, [currentPage, search])
 
 
   return (
     <>
       <Head>
         <title>
-          PET-FRIENDS Social
+          Pet-Friends Social
         </title>
       </Head>
       <Box
@@ -45,7 +47,7 @@ const Products = () => {
         }}
       >
         <Container maxWidth={false}>
-          <ProductListToolbar />
+          <ProductListToolbar setSearch={setSearch} />
           <Box sx={{ pt: 3 }}>
             <Grid
               container

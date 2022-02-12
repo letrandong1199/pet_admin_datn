@@ -14,7 +14,7 @@ const Dashboard = () => (
   <>
     <Head>
       <title>
-        Dashboard | Material Kit
+        Dashboard | Pet-Friends Social
       </title>
     </Head>
     <Box

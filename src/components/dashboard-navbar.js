@@ -31,8 +31,6 @@ export const DashboardNavbar = (props) => {
       getMyInfo();
     }
   }, [])
-
-  console.log(user);
   const handleLogout = () =>
     logout();
   return (

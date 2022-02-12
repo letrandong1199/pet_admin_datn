@@ -10,38 +10,7 @@ import {
   TextField
 } from '@mui/material';
 
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
 export const AccountProfileDetails = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
-  });
-
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
-
   return (
     <form
       autoComplete="off"
@@ -50,7 +19,6 @@ export const AccountProfileDetails = (props) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
           title="Profile"
         />
         <Divider />
@@ -65,13 +33,12 @@ export const AccountProfileDetails = (props) => {
               xs={12}
             >
               <TextField
-                fullWidth
+                disabled
                 helperText="Please specify the first name"
                 label="First name"
                 name="firstName"
-                onChange={handleChange}
                 required
-                value={values.firstName}
+                value={props.user?.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -81,12 +48,11 @@ export const AccountProfileDetails = (props) => {
               xs={12}
             >
               <TextField
-                fullWidth
+                disabled
                 label="Last name"
                 name="lastName"
-                onChange={handleChange}
                 required
-                value={values.lastName}
+                value={props.user?.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -96,12 +62,11 @@ export const AccountProfileDetails = (props) => {
               xs={12}
             >
               <TextField
-                fullWidth
+                disabled
                 label="Email Address"
                 name="email"
-                onChange={handleChange}
                 required
-                value={values.email}
+                value={props.user?.email}
                 variant="outlined"
               />
             </Grid>
@@ -111,12 +76,11 @@ export const AccountProfileDetails = (props) => {
               xs={12}
             >
               <TextField
-                fullWidth
+                disabled
                 label="Phone Number"
                 name="phone"
-                onChange={handleChange}
                 type="number"
-                value={values.phone}
+                value={props.user?.phone_number}
                 variant="outlined"
               />
             </Grid>
@@ -126,58 +90,18 @@ export const AccountProfileDetails = (props) => {
               xs={12}
             >
               <TextField
+                disabled
                 fullWidth
                 label="Country"
                 name="country"
-                onChange={handleChange}
                 required
-                value={values.country}
+                value={props.user?.country_code}
                 variant="outlined"
               />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
             </Grid>
           </Grid>
         </CardContent>
         <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Save details
-          </Button>
-        </Box>
       </Card>
     </form>
   );

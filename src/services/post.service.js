@@ -11,5 +11,10 @@ class PostService {
             return response.data;
         })
     }
+    updateStatus(id, data) {
+        return axiosClient.put(`/posts/${id}/update_status`, data).then(response => {
+            return response;
+        })
+    }
 }
 export default new PostService();

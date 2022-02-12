@@ -6,9 +6,14 @@ class UserService {
             console.log('Got a token in the localStorage');
             axiosClient.defaults.headers.Authorization = `Bearer ${token}`;
             const { data: user } = await axiosClient.get('users/me');
-            console.log(user)
+            console.log('ahahahahahahaha', user);
             return user;
         }
+    }
+    getAll() {
+        return axiosClient.get('/users').then(response => {
+            return response.data;
+        })
     }
 }
 export default new UserService();

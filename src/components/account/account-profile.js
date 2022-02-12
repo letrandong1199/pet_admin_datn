@@ -8,16 +8,6 @@ import {
   Divider,
   Typography
 } from '@mui/material';
-
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
-};
-
 export const AccountProfile = (props) => (
   <Card {...props}>
     <CardContent>
@@ -29,7 +19,7 @@ export const AccountProfile = (props) => (
         }}
       >
         <Avatar
-          src={user.avatar}
+          src={props.user?.avatar}
           sx={{
             height: 64,
             mb: 2,
@@ -41,31 +31,15 @@ export const AccountProfile = (props) => (
           gutterBottom
           variant="h5"
         >
-          {user.name}
+          {props.user?.username}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {`${user.city} ${user.country}`}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.timezone}
+          {`${props.user?.public_address}`}
         </Typography>
       </Box>
     </CardContent>
-    <Divider />
-    <CardActions>
-      <Button
-        color="primary"
-        fullWidth
-        variant="text"
-      >
-        Upload picture
-      </Button>
-    </CardActions>
   </Card>
 );

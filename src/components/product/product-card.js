@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, ImageListItem } from '@mui/material';
 import { Clock as ClockIcon } from '../../icons/clock';
-import { Download as DownloadIcon } from '../../icons/download';
 import FormDialog from 'src/components/product/product-detail';
-import { BsEyeFill } from 'react-icons/bs'
+import { BsFillPersonFill, BsHeartFill } from 'react-icons/bs'
 import React, { useState } from 'react';
 
 export const ProductCard = ({ post, ...rest }) => {
   const [open, setOpen] = useState(false);
   const [postDetail, setPostDetail] = useState({});
+  const [isAlert, setIsAlert] = React.useState(false);
+
   const handleClick = (post) => {
     setOpen(true);
     setPostDetail(post);
@@ -16,8 +17,9 @@ export const ProductCard = ({ post, ...rest }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setIsAlert(false);
   }
-
+  console.log(postDetail)
   return (
     <React.Fragment>
       <Card
@@ -30,7 +32,7 @@ export const ProductCard = ({ post, ...rest }) => {
         {...rest}
       >
         <CardContent>
-          <Box
+          <Box style={{ height: '80%' }}
             sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -38,26 +40,19 @@ export const ProductCard = ({ post, ...rest }) => {
             }}
           >
             <img
+              style={{ objectFit: 'fill' }}
               src={`${post.media_url}`}
               loading="lazy"
             />
           </Box>
-          {/* <Typography
-        align="center"
-        color="textPrimary"
-        gutterBottom
-        variant="h5"
-        noWrap={true}
-      >
-        {post.caption}
-      </Typography> */}
           <Typography
             align="center"
             color="textPrimary"
             variant="body1"
             noWrap={true}
+            style={{ height: '20%' }}
           >
-            {'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.'}
+            {post.caption}
           </Typography>
         </CardContent>
         <Box sx={{ flexGrow: 1 }} />
@@ -75,14 +70,15 @@ export const ProductCard = ({ post, ...rest }) => {
                 display: 'flex'
               }}
             >
-              <ClockIcon color="action" />
+              <BsFillPersonFill color='#6B7280'
+                size={25} />
               <Typography
                 color="textSecondary"
                 display="inline"
                 sx={{ pl: 1 }}
                 variant="body2"
               >
-                {`Created ${post.created_at}`}
+                {`${post.User.last_name}`}
               </Typography>
             </Grid>
             <Grid
@@ -92,9 +88,17 @@ export const ProductCard = ({ post, ...rest }) => {
                 display: 'flex'
               }}
             >
-              <BsEyeFill
+              <BsHeartFill
                 color='#6B7280'
                 size={25} />
+              <Typography
+                color="textSecondary"
+                display="inline"
+                sx={{ pl: 1 }}
+                variant="body2"
+              >
+                {`${post.upvote}`}
+              </Typography>
             </Grid>
           </Grid>
         </Box>
@@ -102,7 +106,9 @@ export const ProductCard = ({ post, ...rest }) => {
       <FormDialog
         open={open}
         post={postDetail}
-        handleClose={handleClose} />
+        handleClose={handleClose}
+        setIsAlert={setIsAlert}
+        isAlert={isAlert} />
     </React.Fragment>
   );
 }

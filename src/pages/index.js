@@ -12,7 +12,6 @@ import { useAuth } from '../app/authContext';
 
 const Login = () => {
   const router = useRouter();
-  const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [validated, setValidated] = useState(false);
   const { isAuthenticated, loading, login } = useAuth();
@@ -20,43 +19,20 @@ const Login = () => {
     router.replace('/dashboard');
   }
   const handleLogin = async (e) => {
-    e.preventDefault();
-    login({ email: username, password: password })
+    const email = username;
+    if (email) {
+      console.log(email);
+      login(email);
+    }
   }
   const handleChangeUsername = (e) => {
     setUsername(e.target.value);
   }
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: 'demo@devias.io',
-  //     password: 'Password123'
-  //   },
-  //   validationSchema: Yup.object({
-  //     email: Yup
-  //       .string()
-  //       .email(
-  //         'Must be a valid email')
-  //       .max(255)
-  //       .required(
-  //         'Email is required'),
-  //     password: Yup
-  //       .string()
-  //       .max(255)
-  //       .required(
-  //         'Password is required')
-  //   }),
-  //   onSubmit: values => {
-  //     login({ email: values.email, password: values.password });
-  //   },
-  // });
 
   return (
     <>
       <Head>
-        <title>Login | Material Kit</title>
+        <title>Login | Pet-Friends Social</title>
       </Head>
       <Box
         component="main"
@@ -146,19 +122,6 @@ const Login = () => {
               onChange={handleChangeUsername}
               type="email"
               value={username}
-              variant="outlined"
-            />
-            <TextField
-              // error={Boolean(formik.touched.password && formik.errors.password)}
-              fullWidth
-              // helperText={formik.touched.password && formik.errors.password}
-              label="Password"
-              margin="normal"
-              name="password"
-              // onBlur={formik.handleBlur}
-              onChange={handleChangePassword}
-              type="password"
-              value={password}
               variant="outlined"
             />
             <Box sx={{ py: 2 }}>

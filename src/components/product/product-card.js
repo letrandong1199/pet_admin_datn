@@ -40,7 +40,7 @@ export const ProductCard = ({ post, ...rest }) => {
             }}
           >
             <img
-              style={{ objectFit: 'fill' }}
+              style={{ objectFit: 'contain', width: '100%' }}
               src={`${post.media_url}`}
               loading="lazy"
             />
@@ -78,7 +78,7 @@ export const ProductCard = ({ post, ...rest }) => {
                 sx={{ pl: 1 }}
                 variant="body2"
               >
-                {`${post.User.last_name}`}
+                {`${post.User?.last_name}`}
               </Typography>
             </Grid>
             <Grid

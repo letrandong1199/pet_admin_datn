@@ -10,8 +10,12 @@ const Customers = () => {
   useEffect(() => {
     userService.getAll().then(response => {
       const listUsers = response;
-      setUsers([...users, ...listUsers])
-    }).catch(console.error());
+      if (listUsers.length !== 0) {
+        setUsers([...users, ...listUsers])
+      }
+    }).catch(e => {
+      console.log(e)
+    });
   }, [])
   return (
     <>

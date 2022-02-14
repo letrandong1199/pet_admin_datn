@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
         console.log({ ...user, metadata });
         setUser({ ...user, metadata });
         setLoading(false);
-        router.push('/user/me');
+        router.push('/dashboard');
       }
     } catch (error) {
       setLoading(false);

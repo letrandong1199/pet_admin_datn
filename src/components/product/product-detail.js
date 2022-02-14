@@ -66,7 +66,7 @@ const FormDialog = (props) => {
                 <DialogContent style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <DialogContentText style={{ width: '30%' }}>
                         <img
-                            style={{ objectFit: 'contain', height: '80%' }}
+                            style={{ objectFit: 'cover', height: '80%', width: '100%' }}
                             src={props.post.media_url}
                         />
                         <FormControl sx={{ mt: 2, minWidth: '100%' }}>

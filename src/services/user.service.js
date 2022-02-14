@@ -12,7 +12,10 @@ class UserService {
     }
     getAll() {
         return axiosClient.get('/users').then(response => {
-            return response.data;
+            return response?.data || [];
+        }).catch(e => {
+            console.log(e)
+            return [];
         })
     }
 }

@@ -35,7 +35,7 @@ export const AccountProfileDetails = (props) => {
               <TextField
                 disabled
                 helperText="Please specify the first name"
-                label="First name"
+                // label="First name"
                 name="firstName"
                 required
                 value={props.user?.first_name}
@@ -49,7 +49,7 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 disabled
-                label="Last name"
+                // label="Last name"
                 name="lastName"
                 required
                 value={props.user?.last_name}
@@ -63,7 +63,7 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 disabled
-                label="Email Address"
+                // label="Email Address"
                 name="email"
                 required
                 value={props.user?.email}
@@ -77,7 +77,7 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 disabled
-                label="Phone Number"
+                // label="Phone Number"
                 name="phone"
                 type="number"
                 value={props.user?.phone_number}
@@ -92,7 +92,7 @@ export const AccountProfileDetails = (props) => {
               <TextField
                 disabled
                 fullWidth
-                label="Country"
+                // label="Country"
                 name="country"
                 required
                 value={props.user?.country_code}

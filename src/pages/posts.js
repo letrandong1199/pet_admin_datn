@@ -74,7 +74,7 @@ const Products = () => {
           >
             <Pagination
               color="primary"
-              count={pageSize / 3}
+              count={Math.floor(pageSize / 3)}
               page={currentPage}
               size="small"
               onChange={handleChangePage}

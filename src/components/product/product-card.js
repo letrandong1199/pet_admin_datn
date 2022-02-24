@@ -78,7 +78,7 @@ export const ProductCard = ({ post, ...rest }) => {
                 sx={{ pl: 1 }}
                 variant="body2"
               >
-                {`${post.User?.last_name}`}
+                {`${post.User?.last_name ?? 'Anonymous'}`}
               </Typography>
             </Grid>
             <Grid
@@ -97,7 +97,7 @@ export const ProductCard = ({ post, ...rest }) => {
                 sx={{ pl: 1 }}
                 variant="body2"
               >
-                {`${post.upvote}`}
+                {`${post.upvote ?? 0}`}
               </Typography>
             </Grid>
           </Grid>

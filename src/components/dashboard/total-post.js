@@ -1,15 +1,15 @@
 import { Avatar, Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import PeopleIcon from "@mui/icons-material/PeopleOutlined";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import MoneyIcon from "@mui/icons-material/Money";
+import PostService from "../../services/post.service";
 import { useEffect, useState } from "react";
-import UserService from "../../services/user.service";
 
-export const TotalCustomers = (props) => {
-  const [totalUser, setTotalUser] = useState("...");
+export const TotalPost = (props) => {
+  const [totalPost, setTotalPost] = useState("...");
   useEffect(() => {
-    UserService.getSummary()
+    PostService.getSummary()
       .then((data) => {
-        setTotalUser(data.total_user);
+        setTotalPost(data.total_post);
       })
       .catch((error) => {
         console.log(error.message);
@@ -17,42 +17,43 @@ export const TotalCustomers = (props) => {
     return () => {};
   }, []);
   return (
-    <Card {...props}>
+    <Card sx={{ height: "100%" }} {...props}>
       <CardContent>
         <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="overline">
-              TOTAL CUSTOMERS
+              Total Post
             </Typography>
             <Typography color="textPrimary" variant="h4">
-              {totalUser}
+              {totalPost}
             </Typography>
           </Grid>
           <Grid item>
             <Avatar
               sx={{
-                backgroundColor: "success.main",
+                backgroundColor: "error.main",
                 height: 56,
                 width: 56,
               }}
             >
-              <PeopleIcon />
+              <MoneyIcon />
             </Avatar>
           </Grid>
         </Grid>
         <Box
           sx={{
-            alignItems: "center",
-            display: "flex",
             pt: 2,
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <ArrowUpwardIcon color="success" />
+          <ArrowDownwardIcon color="error" />
           <Typography
-            variant="body2"
+            color="error"
             sx={{
               mr: 1,
             }}
+            variant="body2"
           >
             ...%
           </Typography>

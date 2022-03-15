@@ -6,16 +6,16 @@ import {
   CardActions,
   CardContent,
   Divider,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 export const AccountProfile = (props) => (
   <Card {...props}>
     <CardContent>
       <Box
         sx={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column'
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <Avatar
@@ -23,21 +23,14 @@ export const AccountProfile = (props) => (
           sx={{
             height: 64,
             mb: 2,
-            width: 64
+            width: 64,
           }}
         />
-        <Typography
-          color="textPrimary"
-          gutterBottom
-          variant="h5"
-        >
+        <Typography color="textPrimary" gutterBottom variant="h5">
           {props.user?.username}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {`${props.user?.public_address}`}
+        <Typography color="textSecondary" variant="body2">
+          {`${props.user?.email}`}
         </Typography>
       </Box>
     </CardContent>

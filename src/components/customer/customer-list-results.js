@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import { useState } from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import {
   Avatar,
   Box,
@@ -13,9 +13,38 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
+  Typography,
+} from "@mui/material";
+import { getInitials } from "../../utils/get-initials";
+
+const stringToColor = (string) => {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+};
+
+const stringAvatar = (name) => {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+};
 
 export const CustomerListResults = ({ users, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -74,27 +103,15 @@ export const CustomerListResults = ({ users, ...rest }) => {
                     checked={selectedCustomerIds.length === users.length}
                     color="primary"
                     indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < users.length
+                      selectedCustomerIds.length > 0 && selectedCustomerIds.length < users.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Zip
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Registration date
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Zip</TableCell>
+                <TableCell>Registration date</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -114,36 +131,22 @@ export const CustomerListResults = ({ users, ...rest }) => {
                   <TableCell>
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex'
+                        alignItems: "center",
+                        display: "flex",
                       }}
                     >
                       <Avatar
                         src={customer.avatar}
-                        sx={{ mr: 2 }}
-                      >
-                        {customer?.first_name}
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-                        {customer.first_name}
+                        {...stringAvatar(customer.first_name + " " + customer.last_name)}
+                      />
+                      <Typography style={{ marginLeft: 10 }} color="textPrimary" variant="body1">
+                        {customer.first_name + " " + customer.last_name}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    {`${customer.country_code}`}
-                  </TableCell>
-                  <TableCell>
-                    {customer.phone_number}
-                  </TableCell>
-                  <TableCell>
-                    {customer.created_at, 'dd/MM/yyyy'}
-                  </TableCell>
+                  <TableCell>{customer.email}</TableCell>
+                  <TableCell>{`${customer.country_code}`}</TableCell>
+                  <TableCell>{customer.created_at}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -164,5 +167,5 @@ export const CustomerListResults = ({ users, ...rest }) => {
 };
 
 CustomerListResults.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };
